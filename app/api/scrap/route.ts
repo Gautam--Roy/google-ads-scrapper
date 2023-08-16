@@ -1,4 +1,5 @@
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
+import Chromium from "chrome-aws-lambda";
 
 import { NextResponse } from "next/server";
 
@@ -12,7 +13,8 @@ export async function GET(request: Request) {
 
   const browser = await puppeteer.launch({
     headless: "new",
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    args: Chromium.args,
+    executablePath: await Chromium.executablePath,
   });
   const page = await browser.newPage();
   let siteDatas: any = [];

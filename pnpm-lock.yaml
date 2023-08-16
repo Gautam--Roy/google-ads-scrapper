@@ -17,6 +17,9 @@ dependencies:
   autoprefixer:
     specifier: 10.4.15
     version: 10.4.15(postcss@8.4.28)
+  chrome-aws-lambda:
+    specifier: ^10.1.0
+    version: 10.1.0(puppeteer-core@21.0.3)
   eslint:
     specifier: 8.47.0
     version: 8.47.0
@@ -30,6 +33,9 @@ dependencies:
     specifier: 8.4.28
     version: 8.4.28
   puppeteer:
+    specifier: ^21.0.3
+    version: 21.0.3
+  puppeteer-core:
     specifier: ^21.0.3
     version: 21.0.3
   react:
@@ -728,6 +734,16 @@ packages:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.2
+    dev: false
+
+  /chrome-aws-lambda@10.1.0(puppeteer-core@21.0.3):
+    resolution: {integrity: sha512-NZQVf+J4kqG4sVhRm3WNmOfzY0OtTSm+S8rg77pwePa9RCYHzhnzRs8YvNI6L9tALIW6RpmefWiPURt3vURXcw==}
+    engines: {node: '>= 10.16'}
+    peerDependencies:
+      puppeteer-core: ^10.1.0
+    dependencies:
+      lambdafs: 2.1.1
+      puppeteer-core: 21.0.3
     dev: false
 
   /chromium-bidi@0.4.20(devtools-protocol@0.0.1147663):
@@ -1895,6 +1911,14 @@ packages:
       object.assign: 4.1.4
       object.values: 1.1.6
     dev: false
+
+  /lambdafs@2.1.1:
+    resolution: {integrity: sha512-x5k8JcoJWkWLvCVBzrl4pzvkEHSgSBqFjg3Dpsc4AcTMq7oUMym4cL/gRTZ6VM4mUMY+M0dIbQ+V1c1tsqqanQ==}
+    engines: {node: '>= 10.16'}
+    hasBin: true
+    dev: false
+    bundledDependencies:
+      - tar-fs
 
   /language-subtag-registry@0.3.22:
     resolution: {integrity: sha512-tN0MCzyWnoz/4nHS6uxdlFWoUZT7ABptwKPQ52Ea7URk6vll88bWBVhodtnlfEuCcKWNGoc+uGbw1cwa9IKh/w==}
