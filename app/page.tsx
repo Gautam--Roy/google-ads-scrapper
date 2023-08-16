@@ -9,7 +9,7 @@ export default function Home() {
     setList([]);
 
     const params = new URLSearchParams({
-      pageCount: "5",
+      pageCount: "2",
       keywords: keywords,
     });
 
