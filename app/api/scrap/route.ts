@@ -7,12 +7,14 @@ export const revalidate = 0;
 export async function GET(request: Request) {
   const url = new URL(request.url);
 
-  const pageCount = parseInt(url.searchParams.get("pageCount") as string);
-  const keywords = url.searchParams.get("keywords");
+  let pageCount = parseInt(url.searchParams.get("pageCount") as string);
+  let keywords = (url.searchParams.get("keywords") as string)?.trim();
+  let defaultPageCount = 1;
 
   const browser = await puppeteer.launch({
     headless: "new",
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    executablePath: `/usr/bin/google-chrome`,
   });
   const page = await browser.newPage();
   let ads: any = [];
@@ -25,12 +27,14 @@ export async function GET(request: Request) {
     });
   });
 
-  ads.push(siteData);
+  if (siteData.length) ads.push(siteData);
 
-  let searchPage = 1;
-  while (searchPage < pageCount) {
-    searchPage++;
-    let newPage = await page.$(`a[aria-label="Page ${searchPage}"]`);
+  // Hardcoding pageCount to 3 if it's greater
+  if (pageCount > 3) pageCount = 3;
+  // Searching other pages.
+  while (defaultPageCount <= pageCount) {
+    defaultPageCount++;
+    let newPage = await page.$(`a[aria-label="Page ${defaultPageCount}"]`);
 
     if (newPage) {
       await Promise.all([page.waitForNavigation(), newPage.click()]);
