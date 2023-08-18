@@ -17,7 +17,7 @@ export async function GET(request: Request) {
     executablePath: await Chromium.executablePath,
   });
   const page = await browser.newPage();
-  let siteDatas: any = [];
+  let ads: any = [];
 
   await page.goto(`https://www.google.com/search?q=${keywords}`);
   const siteData = await page.evaluate(() => {
@@ -27,7 +27,7 @@ export async function GET(request: Request) {
     });
   });
 
-  siteDatas.push(siteData);
+  ads.push(siteData);
 
   let searchPage = 1;
   while (searchPage < pageCount) {
@@ -44,11 +44,11 @@ export async function GET(request: Request) {
         });
       });
 
-      siteDatas.push(nextPage);
+      ads.push(nextPage);
     }
   }
 
   await browser.close();
 
-  return NextResponse.json(siteDatas);
+  return NextResponse.json(ads);
 }
