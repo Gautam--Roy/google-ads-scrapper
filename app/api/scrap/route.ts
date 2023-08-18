@@ -11,6 +11,8 @@ export async function GET(request: Request) {
   let keywords = (url.searchParams.get("keywords") as string)?.trim();
   let defaultPageCount = 1;
 
+  console.log(`Pages: ${pageCount}, Keywords: ${keywords}`);
+
   const browser = await puppeteer.launch({
     headless: "new",
     args: ["--no-sandbox", "--disable-setuid-sandbox"],

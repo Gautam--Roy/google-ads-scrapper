@@ -31,7 +31,6 @@ export default function Home() {
     const sponsoredAdsList = await req.json();
     setList(sponsoredAdsList);
     setSearching(false);
-    console.log(list);
   };
 
   return (
